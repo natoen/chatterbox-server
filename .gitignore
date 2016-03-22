@@ -38,3 +38,11 @@ node_modules
 
 ### PhPStorm ###
 .idea/
+
+## API keys
+client/env/config.js
+
+.floo
+.flooignore
+bower.json
+package.json
