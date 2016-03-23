@@ -48,11 +48,11 @@ $(function() {
         }
       });
     },
-    send: function(message) {
+    send: function(data) {
       $.ajax({
         url: app.server,
         type: 'POST',
-        data: JSON.stringify(message),
+        data: JSON.stringify(data),
         contentType: 'application/json',
         success: function(data) {
           console.log('Message sent!');
@@ -65,7 +65,7 @@ $(function() {
     handleSubmit: function(event) {
       var message = {
         username: app.username,
-        text: app.$message.val(),
+        message: app.$message.val(), // Modified to be message instead of text
         roomname: app.roomname || 'lobby'
       };
       app.send(message);
@@ -113,7 +113,7 @@ $(function() {
       $username.text(message.username + ': ').attr('data-username', message.username)
         .attr('data-roomname', message.roomname).appendTo($chat);
       var $message = $('<span class="msg"/>');
-      $message.text(message.text).appendTo($chat);
+      $message.text(message.message).appendTo($chat); // changed message.text to be message.message
       $chat.append(' ');
       if(message.createdAt) {
         var $time = $('<span class="time"/>');
