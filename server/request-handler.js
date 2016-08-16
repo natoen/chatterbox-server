@@ -17,20 +17,21 @@ var requestHandler = function(request, response) {
   // debugging help, but you should always be careful about leaving stray
 
   // console.logs in your code.
-  console.log('Serving request type ' + request.method + ' for url ' + request.url);
+  var requestMethod = request.method !== 'OPTIONS' ? request.method : request.headers['access-control-request-method'];
+  console.log('Serving request type ' + requestMethod + ' for url ' + request.url);
 
   // Our router (404 with data as null if wrong request) 
   if (request.url.indexOf('/classes') < 0) {
     sendResponse(response, 404, null);
   } else {
-    if (request.method === 'POST') {
+    if (request.method === 'POST' || (request.headers && request.headers['access-control-request-method'] === 'POST')) {
       request.on('error', function(err) {
         console.error(err);
       });
 
       var data = '';
       request.on('data', function(hexData) {
-        data += hexData.toString();
+        data += hexData;
       });
 
       request.on('end', function() {
@@ -42,7 +43,7 @@ var requestHandler = function(request, response) {
       });
       
       sendResponse(response, 201, resultsObj.results.length + 1);
-    } else if (request.method === 'GET') {
+    } else if (request.method === 'GET' || (request.headers && request.headers['access-control-request-method'] === 'GET')) {
       sendResponse(response, 200, resultsObj);
     }
   }  

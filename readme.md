@@ -1,5 +1,5 @@
 # Chatterbox Server [![Build Status](https://travis-ci.org/natoen/chatterbox-server.svg?branch=master)](https://travis-ci.org/natoen/chatterbox-server)
-A server side implementation of our [Chatterbox Client][chatterboxclient] using [Node.js][node].
+A server side implementation for our [Chatterbox Client][chatterboxclient] using [Node.js][node].
 
 ## Instructions:
 - Please make sure to do a `npm install` first
